@@ -75,25 +75,25 @@ public class BackgroundManager : MonoBehaviour
             foreground.Translate(moveSpeeds[2] * Time.fixedDeltaTime, 0.0f, 0.0f);
         }
         // Bounce the backgrounds back.
-        if (backgrounds[0].transform.position.x <= -sizes[0])
+        if (backgrounds[0].transform.position.x <= -sizes[0]/2 )
         {
             for (int i = 0; i < backgrounds.Length; i++)
             {
-                backgrounds[i].transform.position = new Vector3(backgroundStarts[i], 0f, 0f);
+                backgrounds[i].transform.position = new Vector3(backgroundStarts[i], -12f, 0f);
             }
         }
-        if (midgrounds[0].transform.position.x <= -sizes[1])
+        if (midgrounds[0].transform.position.x <= -sizes[1]/2)
         {
             for (int i = 0; i < midgrounds.Length; i++)
             {
-                midgrounds[i].transform.position = new Vector3(midgroundStarts[i], 0f, 0f);
+                midgrounds[i].transform.position = new Vector3(midgroundStarts[i], -16f, 0f);
             }
         }
-        if (foregrounds[0].transform.position.x <= -sizes[2])
+        if (foregrounds[0].transform.position.x <= -sizes[2]/2)
         {
             for (int i = 0; i < foregrounds.Length; i++)
             {
-                foregrounds[i].transform.position = new Vector3(foregroundStarts[i], -16f, 0f);
+                foregrounds[i].transform.position = new Vector3(foregroundStarts[i], -21f, 0f);
             }
         }
     }

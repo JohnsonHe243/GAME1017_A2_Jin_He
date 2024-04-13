@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO: Make this whole script. :)
-public class ObstacleManager : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
     [SerializeField] GameObject obstaclePrefab;
     [SerializeField] List<GameObject> obstacles;
@@ -14,9 +14,9 @@ public class ObstacleManager : MonoBehaviour
     void Start()
     {
         obstacles = new List<GameObject>(); 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject obsInst = GameObject.Instantiate(obstaclePrefab, new Vector3(i * 4f, -16f, 0f), Quaternion.identity);
+            GameObject obsInst = GameObject.Instantiate(obstaclePrefab, new Vector3(i * 4f, -18.4f, 0f), Quaternion.identity);
             obsInst.transform.parent = transform;
             obstacles.Add(obsInst);
         }
@@ -35,11 +35,11 @@ public class ObstacleManager : MonoBehaviour
             Destroy(obstacles[0]);
             obstacles.RemoveAt(0);
             // Push a new obstacle at the end.
-            GameObject obsInst = GameObject.Instantiate(obstaclePrefab, new Vector3(32f, -16f, 0f), Quaternion.identity);
+            GameObject obsInst = GameObject.Instantiate(obstaclePrefab, new Vector3(32f, -18.4f, 0f), Quaternion.identity);
             if (obsCtr++ % 3 == 0)
             {
                 obsInst.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
-                obsInst.AddComponent<BoxCollider2D>();
+                obsInst.AddComponent<PolygonCollider2D>();
             }
             obsInst.transform.parent = transform;
             obsInst.layer = 3; // So we can land on obstacles for this lab.
