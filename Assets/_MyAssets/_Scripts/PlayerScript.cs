@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum CharacterState
 {
     Idling,
     Running,
     Rolling,
-    Jumping
+    Jumping,
+    Dead
 }
 public class PlayerScript : MonoBehaviour
 {
@@ -22,8 +25,14 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
 
+    [SerializeField] GameObject[] health;
+    public int hits = 0;
+    public bool isAlive = true;
+
     private CharacterState currentState;
     private bool jumpStarted;
+
+    private bool invulnerability = false;
 
     void Start()
     {
@@ -55,15 +64,78 @@ public class PlayerScript : MonoBehaviour
             case CharacterState.Jumping:
                 HandleJumpingState();
                 break;
+            case CharacterState.Dead:
+                HandleDeathState();
+                break;
+        }
+        if (hits == 3)
+        {
+            isAlive = false;
+        }
+        if (invulnerability == true)
+        {
+            SetObstacleColliders(true);
+            SetPlayerVisibility(0.2f);
+        }
+        else if (invulnerability == false)
+        {
+            SetObstacleColliders(false);
+            SetPlayerVisibility(1f);
+        }
+    }
+
+    void OnCollisionEnter2D(UnityEngine.Collision2D collision)
+    {
+        if (isAlive == false) return;
+        if (invulnerability == false && collision.gameObject.tag == "Obstacle")
+        {
+            health[hits].SetActive(false);
+            hits++;
+            invulnerability = true;
+            Invoke("Vulnerable", 10);
+        }
+        Debug.Log(hits);
+    }
+
+    void Vulnerable()
+    {
+        invulnerability = false;
+    }
+
+    void SetPlayerVisibility(float invis)
+    {
+        Color color = GetComponentInChildren<SpriteRenderer>().color;
+        color.a = invis;
+        GetComponentInChildren<SpriteRenderer>().color = color;
+    }
+
+    void SetObstacleColliders(bool si)
+    {
+        GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject obstacle in obstacles)
+        {
+            PolygonCollider2D obstacleCollider = obstacle.GetComponent<PolygonCollider2D>();
+            if (obstacleCollider != null)
+            {
+                obstacleCollider.isTrigger = si;
+                obstacleCollider.enabled = !si;
+            }
         }
     }
 
     private void HandleIdlingState()
     {
+
         // State logic here.
         transform.Translate(new Vector3(-4f * Time.deltaTime, 0f, 0f));
+        if (isGrounded && isAlive == false)
+        {
+            an.SetBool("isDead", true);
+            currentState = CharacterState.Dead;
+            Invoke("GameOver", 1.5f);
 
-        if (isGrounded && (Input.GetAxis("Horizontal") != 0)) // To Running.
+        }
+        else if (isGrounded && (Input.GetAxis("Horizontal") != 0)) // To Running.
         {
             an.SetBool("isMoving", true);
             currentState = CharacterState.Running;
@@ -89,7 +161,7 @@ public class PlayerScript : MonoBehaviour
         // State logic here.
         MoveCharacter();
         // Transistions.
-        if (isGrounded && (Input.GetAxis("Horizontal") == 0)) // To Idling.
+        if(isGrounded && (Input.GetAxis("Horizontal") == 0)) // To Idling.
         {
             an.SetBool("isMoving", false);
             currentState = CharacterState.Idling;
@@ -135,6 +207,10 @@ public class PlayerScript : MonoBehaviour
             currentState = CharacterState.Idling;
         }
     }
+    private void HandleDeathState()
+    {
+
+    }
     private void MoveCharacter()
     {
         // Horizontal movement.
@@ -158,9 +234,13 @@ public class PlayerScript : MonoBehaviour
         currentState = CharacterState.Jumping;
         Invoke("ResetJumpStarted", 0.5f);
     }
-
     private void ResetJumpStarted()
     {
         jumpStarted = false;
     }
+    void GameOver()
+    {
+        SceneLoader.LoadSceneByIndex(2);
+    }
+
 }

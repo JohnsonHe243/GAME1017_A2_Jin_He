@@ -23,6 +23,7 @@ public class Obstacle : MonoBehaviour
         // Start the InvokeRepeating method.
         InvokeRepeating("MoveObstacles", 0f, Time.fixedDeltaTime);
     }
+
     private void MoveObstacles()
     {
         foreach (GameObject obstacle in obstacles)

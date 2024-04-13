@@ -22,6 +22,7 @@ public class ObstacleFlying : MonoBehaviour
         // Start the InvokeRepeating method.
         InvokeRepeating("MoveObstacles", 0f, Time.fixedDeltaTime);
     }
+
     private void MoveObstacles()
     {
         foreach (GameObject obstacle in obstacles)
@@ -39,6 +40,7 @@ public class ObstacleFlying : MonoBehaviour
             {
                 obsInst.GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
                 obsInst.AddComponent<PolygonCollider2D>();
+
             }
             obsInst.transform.parent = transform;
             obsInst.layer = 3; // So we can land on obstacles for this lab.
