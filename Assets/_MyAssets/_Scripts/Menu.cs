@@ -8,6 +8,5 @@ public class Menu : MonoBehaviour
     void Start()
     {
         Game.Instance.SOMA.PlayMusic("Slow");
-
     }
 }

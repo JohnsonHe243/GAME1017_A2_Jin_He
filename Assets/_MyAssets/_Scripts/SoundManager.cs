@@ -1,8 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SoundManager
+public class SoundManager : MonoBehaviour
 {
+
+    [SerializeField] Slider master;
+    [SerializeField] Slider music;
+    [SerializeField] Slider sfx;
     public enum SoundType
     {
         SOUND_SFX,
@@ -17,16 +22,13 @@ public class SoundManager
     private AudioSource musicSource;
     private float volumeMaster = 1.0f;
     private float volumeSfx = 1.0f;
-    private float volumeMusic = 0.25f;
+    private float volumeMusic = 1.0f;
 
     // Initialize the SoundManager. I just put this functionality here instead of in the static constructor.
     public void Initialize(GameObject go)
     {
-        sfxSource = go.AddComponent<AudioSource>();
-        sfxSource.volume = volumeSfx * volumeMaster;
-        
+        sfxSource = go.AddComponent<AudioSource>();        
         musicSource = go.AddComponent<AudioSource>();
-        musicSource.volume = volumeMusic * volumeMaster;
         musicSource.loop = true;
     }
 
@@ -95,27 +97,21 @@ public class SoundManager
         }
     }
 
-    public void SetVolume(float volume, SoundType soundType)
+    public void SetSFX()
     {
-        switch (soundType)
-        {
-            case SoundType.SOUND_SFX:
-                volumeSfx = volume;
-                sfxSource.volume = volumeSfx * volumeMaster;
-                break;
-            case SoundType.SOUND_MUSIC:
-                volumeMusic = volume;
-                musicSource.volume = volumeMusic * volumeMaster;
-                break;
-            default:
-                Debug.LogError("Unknown sound type: " + soundType);
-                break;
-        }
+        volumeSfx = sfx.value;
+        sfxSource.volume = volumeSfx * volumeMaster;
     }
 
-    public void SetMasterVolume(float volume)
+    public void SetMusic()
     {
-        volumeMaster = volume;
+        volumeMusic = music.value;
+        musicSource.volume = volumeMusic * volumeMaster;
+    }
+
+    public void SetMaster()
+    {
+        volumeMaster = master.value;
         sfxSource.volume = volumeSfx * volumeMaster;
         musicSource.volume = volumeMusic * volumeMaster;
     }
@@ -147,20 +143,6 @@ public class SoundManager
                 return sfxDictionary;
             case SoundType.SOUND_MUSIC:
                 return musicDictionary;
-            default:
-                Debug.LogError("Unknown sound type: " + soundType);
-                return null;
-        }
-    }
-
-    private AudioSource GetSourceByType(SoundType soundType)
-    {
-        switch (soundType)
-        {
-            case SoundType.SOUND_SFX:
-                return sfxSource;
-            case SoundType.SOUND_MUSIC:
-                return musicSource;
             default:
                 Debug.LogError("Unknown sound type: " + soundType);
                 return null;

@@ -10,7 +10,7 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject panel;
 
     public static Game Instance { get; private set; } // Static object of the class.
-    public SoundManager SOMA;
+    [SerializeField] public SoundManager SOMA;
 
 
     private void Awake() // Ensure there is only one instance.
@@ -30,7 +30,6 @@ public class Game : MonoBehaviour
 
     private void Initialize()
     {
-        SOMA = new SoundManager();
         SOMA.Initialize(gameObject);
         SOMA.AddSound("Jump", Resources.Load<AudioClip>("jump"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Roll", Resources.Load<AudioClip>("roll"), SoundManager.SoundType.SOUND_SFX);
