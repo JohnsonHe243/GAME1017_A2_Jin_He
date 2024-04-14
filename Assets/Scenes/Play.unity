@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 302218545}
   - component: {fileID: 302218546}
   m_Layer: 0
-  m_Name: heart_0
+  m_Name: heart_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 489898061}
   - component: {fileID: 489898062}
   m_Layer: 0
-  m_Name: heart_2
+  m_Name: heart_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffec9b333e554254887879ca2e06baa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1321569001}
 --- !u!1 &762225184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,7 +1360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timertext: {fileID: 2094841699}
-  Scoretext: {fileID: 0}
   highScoreText: {fileID: 0}
   elapsedTime: 0
 --- !u!1 &1135503278
@@ -1688,11 +1686,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.75}
   m_EdgeRadius: 0
---- !u!4 &1321569001 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1912745205481284874, guid: ae170e6d0af0b1140886657b2e66f857, type: 3}
-  m_PrefabInstance: {fileID: 6174852087292620143}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1348326795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,22 +2073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1956e292fe7174a44be7b85cf3d5cc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMaps:
-  - {fileID: 851132729}
-  - {fileID: 1618602819}
-  tileBases: []
-  tileKeys: 
-  tileObstacles: 
-  targetColor: {r: 0, g: 0, b: 0, a: 0}
-  targetColors:
-  - {r: 0.7529412, g: 0.3764706, b: 0.3764706, a: 1}
-  - {r: 0.3764706, g: 0.7529412, b: 0.3764706, a: 1}
-  - {r: 0.3764706, g: 0.3764706, b: 0.7529412, a: 1}
-  - {r: 0.7529412, g: 0.7529412, b: 0.3764706, a: 1}
-  - {r: 0.3764706, g: 0.7529412, b: 0.7529412, a: 1}
-  - {r: 0.7529412, g: 0.3764706, b: 0.7529412, a: 1}
-  transitionDuration: 5
-  pauseDuration: 1
 --- !u!1 &1730184931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,7 +2473,7 @@ PrefabInstance:
     - target: {fileID: 778173735737136837, guid: ae170e6d0af0b1140886657b2e66f857, type: 3}
       propertyPath: health.Array.data[0]
       value: 
-      objectReference: {fileID: 302218544}
+      objectReference: {fileID: 489898060}
     - target: {fileID: 778173735737136837, guid: ae170e6d0af0b1140886657b2e66f857, type: 3}
       propertyPath: health.Array.data[1]
       value: 
@@ -2504,7 +2481,7 @@ PrefabInstance:
     - target: {fileID: 778173735737136837, guid: ae170e6d0af0b1140886657b2e66f857, type: 3}
       propertyPath: health.Array.data[2]
       value: 
-      objectReference: {fileID: 489898060}
+      objectReference: {fileID: 302218544}
     - target: {fileID: 1912745205481284874, guid: ae170e6d0af0b1140886657b2e66f857, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

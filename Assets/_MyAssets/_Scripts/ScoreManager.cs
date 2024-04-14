@@ -19,6 +19,8 @@ public class ScoreManager : MonoBehaviour
         startTime = Time.time; // Gives us a number of seconds.
         if (SceneManager.GetActiveScene().buildIndex == 1)
             StartCoroutine("UpdateTimer");
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+            Game.Instance.SOMA.PlayMusic("Sad");
     }
 
     private void Update()

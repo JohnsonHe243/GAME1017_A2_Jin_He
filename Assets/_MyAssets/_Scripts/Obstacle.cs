@@ -13,6 +13,7 @@ public class Obstacle : MonoBehaviour
     private int obsCtr = 0; // Used to manage the gaps between obstacles.
     void Start()
     {
+        Game.Instance.SOMA.PlayMusic("Fast");
         obstacles = new List<GameObject>(); 
         for (int i = 0; i < 4; i++)
         {

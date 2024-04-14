@@ -89,6 +89,7 @@ public class PlayerScript : MonoBehaviour
         if (isAlive == false) return;
         if (invulnerability == false && collision.gameObject.tag == "Obstacle")
         {
+            Game.Instance.SOMA.PlaySound("Thump");
             health[hits].SetActive(false);
             hits++;
             invulnerability = true;

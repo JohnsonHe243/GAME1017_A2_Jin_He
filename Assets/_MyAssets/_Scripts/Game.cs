@@ -25,6 +25,7 @@ public class Game : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate instances.
         }
+
     }
 
     private void Initialize()
@@ -33,9 +34,16 @@ public class Game : MonoBehaviour
         SOMA.Initialize(gameObject);
         SOMA.AddSound("Jump", Resources.Load<AudioClip>("jump"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Roll", Resources.Load<AudioClip>("roll"), SoundManager.SoundType.SOUND_SFX);
-        SOMA.AddSound("StillDre", Resources.Load<AudioClip>("StillDre"), SoundManager.SoundType.SOUND_MUSIC);
-        SOMA.AddSound("I_Ran", Resources.Load<AudioClip>("I_Ran"), SoundManager.SoundType.SOUND_MUSIC);
-        SOMA.PlayMusic("I_Ran");
+        SOMA.AddSound("Thump", Resources.Load<AudioClip>("thump"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("Sad", Resources.Load<AudioClip>("sad"), SoundManager.SoundType.SOUND_MUSIC); // End Scene
+        SOMA.AddSound("Fast", Resources.Load<AudioClip>("fast"), SoundManager.SoundType.SOUND_MUSIC); // Play Scene
+        SOMA.AddSound("Slow", Resources.Load<AudioClip>("slow"), SoundManager.SoundType.SOUND_MUSIC); // Start Scene
+        //SOMA.PlayMusic("Slow");
+    }
+
+    private void Update()
+    {
+
     }
     public void OptionOpen()
     {
@@ -47,5 +55,4 @@ public class Game : MonoBehaviour
         panel.transform.position = new Vector3(-900, 0, 0);
         Time.timeScale = 1;
     }
-
 }
