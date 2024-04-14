@@ -43,13 +43,13 @@ public class ScoreManager : MonoBehaviour
     {
         if (elapsedTime > PlayerPrefs.GetFloat("HighScore", 0))
         {
-            PlayerPrefs.SetString("HighScore", elapsedTime.ToString("F3"));
+            PlayerPrefs.SetFloat("HighScore", elapsedTime);
         }
     }
 
     void UpdateHighScoreText()
     {
-        highScoreText.text = $"HighScore: {PlayerPrefs.GetFloat("HighScore", 0)} + s";
+        highScoreText.text = $"HighScore: {PlayerPrefs.GetFloat("HighScore", 0)}s";
     }
 
     public void StopTimer()
